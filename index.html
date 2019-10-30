@@ -17,9 +17,21 @@
     // demo 1: rat + star + cake
     // demo 2: rat + star + rackets
 
-      var letterBag = ["b", "u", "t", "t", "e", "r"];
+      //var letterBag = ["b", "u", "t", "t", "e", "r"];
+
+      
+      
+      var letterBag = new Array(100);
+      var scrabbleDist = [9, 2, 2, 4, 12, 2, 3, 2, 9, 1, 1, 4, 2, 6, 8, 2, 1, 6, 4, 6, 4, 2, 2, 1, 2, 1];
+      console.log(scrabbleDist.size);
      
-    
+      for (let i = 0; i < scrabbleDist.length; i++) {
+          for (let j = 0; j < scrabbleDist[i]; j++) {
+              letterBag.push(String.fromCharCode(97 + i));
+          }
+      }
+      
+      console.log(letterBag);
 
     var pos = 0; // no queue in JS apparently so just use this
 
