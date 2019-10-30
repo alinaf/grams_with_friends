@@ -18,7 +18,9 @@
     // demo 2: rat + star + rackets
 
       // ***------ HARD CODED WORDS ------***
-      var letterBag = ["r", "t", "a", "s", "k", "a", "e", "c"];
+      //var letterBag = ["r", "t", "a", "s", "k", "a", "e", "c"];
+      
+
       /*var validWords = new Set(["rat", "rats", "art", "tar", "task", "star", "cars",
           "carts", "rackets", "cake", "cakes", "restack", "casket", "creaks", "racket",
           "tracks", "karates", "takers", "karats", "skater"]);
@@ -26,15 +28,18 @@
 
       
       
-      /*var letterBag = new Array();
+      var unshuffledLetterBag = new Array();
+      var letterBag = new Array();
       var scrabbleDist = [9, 2, 2, 4, 12, 2, 3, 2, 9, 1, 1, 4, 2, 6, 8, 2, 1, 6, 4, 6, 4, 2, 2, 1, 2, 1];
       console.log(scrabbleDist.size);
      
       for (let i = 0; i < scrabbleDist.length; i++) {
           for (let j = 0; j < scrabbleDist[i]; j++) {
-              letterBag.push(String.fromCharCode(97 + i));
+              unshuffledLetterBag.push(String.fromCharCode(97 + i));
           }
-      }*/
+      }
+
+      var letterBag = shuffle(unshuffledLetterBag);
       
       console.log(letterBag);
 
@@ -351,7 +356,17 @@ function updateString(square, letter) {
     }
     if(word.length < 7) return word.length;
     return word.length * 2;
-  }
+   }
+      function shuffle(a) {
+          var j, x, i;
+          for (i = a.length - 1; i > 0; i--) {
+              j = Math.floor(Math.random() * (i + 1));
+              x = a[i];
+              a[i] = a[j];
+              a[j] = x;
+          }
+          return a;
+      }
   // function enterLetter(i) {
   //   if(i == 7) {
   //     back();
