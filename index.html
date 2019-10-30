@@ -17,11 +17,16 @@
     // demo 1: rat + star + cake
     // demo 2: rat + star + rackets
 
-      //var letterBag = ["b", "u", "t", "t", "e", "r"];
+      // ***------ HARD CODED WORDS ------***
+      var letterBag = ["r", "t", "a", "s", "k", "a", "e", "c"];
+      /*var validWords = new Set(["rat", "rats", "art", "tar", "task", "star", "cars",
+          "carts", "rackets", "cake", "cakes", "restack", "casket", "creaks", "racket",
+          "tracks", "karates", "takers", "karats", "skater"]);
+        */ 
 
       
       
-      var letterBag = new Array(100);
+      /*var letterBag = new Array();
       var scrabbleDist = [9, 2, 2, 4, 12, 2, 3, 2, 9, 1, 1, 4, 2, 6, 8, 2, 1, 6, 4, 6, 4, 2, 2, 1, 2, 1];
       console.log(scrabbleDist.size);
      
@@ -29,25 +34,28 @@
           for (let j = 0; j < scrabbleDist[i]; j++) {
               letterBag.push(String.fromCharCode(97 + i));
           }
-      }
+      }*/
       
       console.log(letterBag);
 
-    var pos = 0; // no queue in JS apparently so just use this
+     var pos = 0; // no queue in JS apparently so just use this
 
-  
+      // ***------ IMPORTING FROM DICTIONARY.TXT ------***
       
       var dictString = readTextFile("words_alpha.txt").split("\n");
+
+      console.log(dictString);
 
       var validWords = new Set(dictString);
 
       console.log(validWords.size);
+      console.log("valid=" + validWords);
       console.log(validWords.has("a"));
       console.log(validWords.has("aa"));
 
-      var iterator1 = validWords.values();
-      console.log(iterator1.next().value);
-      console.log(iterator1.next().value);
+      
+      //console.log(iterator1.next().value);
+      //console.log(iterator1.next().value);
       
 
     var plurals = new Set(); // doesn't actually work because each word needs its own memory
@@ -196,7 +204,7 @@
                 if(rawFile.status === 200 || rawFile.status == 0)
                 {
                     allText = rawFile.responseText;
-                    alert(allText);
+                    //alert(allText);
                 }
             }
         }
@@ -205,12 +213,25 @@
       }
 
   function validWord(currentWord) {
-    if(!validWords.has(currentWord)) {
+
+       let iterator1 = validWords.values();
+       for (let i = 0; i < validWords.size; i++) {
+
+           if (iterator1.next().value.localeCompare(currentWord)) {
+               console.log("Found!");
+               break;
+           }
+           else {
+               return "invalid word!";
+           }
+       }
+
+    /*if(!validWords.has(currentWord)) {
       return "invalid word!";
     }
     if(plurals.has(currentWord)) {
       return "no plurals!";
-    }
+    }*/
     var rearranging = false;
     var dimensions;
   // can only pick from one word (well you can pick two if you use all the letters)
@@ -228,7 +249,8 @@
   }
   // must rearrange the whole word
   return "";
-}
+      }
+
 function deleteLetter() {
   if(!currentWord.length) return;
   currentWord = currentWord.slice(0, -1);
